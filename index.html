@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vamsi Krishna Pasumarthy | Java Backend Developer</title>
+  <meta name="description" content="Java Backend Developer at KPMG India. B.Tech CSE Graduate 2025. Spring Boot, REST APIs, Microservices."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+
+  <style>
+  :root {
+    --navy:      #0b1d3a;
+    --navy-mid:  #142d52;
+    --blue:      #1d4ed8;
+    --blue-lt:   #3b82f6;
+    --blue-dim:  rgba(29,78,216,0.08);
+    --blue-glow: rgba(59,130,246,0.18);
+    --white:     #ffffff;
+    --off:       #f5f7fc;
+    --off2:      #eef2fb;
+    --text:      #0b1d3a;
+    --body:      #374151;
+    --muted:     #6b7280;
+    --border:    #dde3f0;
+    --border-dk: #c8d0e5;
+    --green:     #059669;
+    --green-bg:  rgba(5,150,105,0.08);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;font-size:16px}
+  body{font-family:'IBM Plex Sans',sans-serif;background:var(--white);color:var(--body);line-height:1.7;overflow-x:hidden}
+  ::-webkit-scrollbar{width:3px}
+  ::-webkit-scrollbar-track{background:var(--off)}
+  ::-webkit-scrollbar-thumb{background:var(--blue)}
+  a{color:inherit;text-decoration:none}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);height:60px}
+  .nav-inner{max-width:1120px;margin:0 auto;padding:0 48px;height:100%;display:flex;align-items:center;justify-content:space-between}
+  .nav-logo{font-family:'Instrument Serif',serif;font-size:18px;color:var(--navy)}
+  .nav-logo span{color:var(--blue)}
+  .nav-links{display:flex;align-items:center;gap:32px;list-style:none}
+  .nav-links a{font-size:13px;font-weight:500;color:var(--muted);transition:color .2s}
+  .nav-links a:hover{color:var(--navy)}
+  .nav-hire{padding:8px 20px;background:var(--navy);color:var(--white)!important;border-radius:6px;font-size:13px!important;font-weight:500!important;transition:background .2s!important}
+  .nav-hire:hover{background:var(--blue)!important}
+
+  /* HERO */
+  #hero{padding:140px 0 100px;background:var(--white);position:relative;overflow:hidden}
+  #hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:48px 48px;opacity:.35;pointer-events:none}
+  #hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:120px;background:linear-gradient(to bottom,transparent,var(--white));pointer-events:none}
+  .hero-inner{max-width:1120px;margin:0 auto;padding:0 48px;position:relative;z-index:1;display:grid;grid-template-columns:1fr auto;gap:60px;align-items:center}
+  .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:100px;background:var(--green-bg);border:1px solid rgba(5,150,105,0.2);margin-bottom:28px}
+  .hero-badge-dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:breathe 2.5s ease-in-out infinite}
+  @keyframes breathe{0%,100%{box-shadow:0 0 0 0 rgba(5,150,105,.5)}50%{box-shadow:0 0 0 5px rgba(5,150,105,0)}}
+  .hero-badge-text{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--green);font-weight:500}
+  .hero-name{font-family:'Instrument Serif',serif;font-size:clamp(44px,5.5vw,76px);color:var(--navy);line-height:1.08;letter-spacing:-.5px;margin-bottom:16px}
+  .hero-name em{font-style:italic;color:var(--blue)}
+  .hero-role{font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:28px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .hero-role .sep{width:3px;height:3px;border-radius:50%;background:var(--border-dk);display:inline-block}
+  .hero-desc{font-size:15.5px;color:var(--body);max-width:540px;line-height:1.85;margin-bottom:40px}
+  .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+  .btn-navy{padding:13px 28px;background:var(--navy);color:var(--white);border-radius:8px;font-size:13px;font-weight:600;transition:background .2s,transform .15s;display:inline-block}
+  .btn-navy:hover{background:var(--blue);transform:translateY(-1px)}
+  .btn-outline{padding:13px 28px;border:1.5px solid var(--border-dk);color:var(--navy);border-radius:8px;font-size:13px;font-weight:600;transition:border-color .2s,background .2s,transform .15s;display:inline-block}
+  .btn-outline:hover{border-color:var(--navy);background:var(--off);transform:translateY(-1px)}
+  .hero-card{width:280px;border-radius:16px;border:1.5px solid var(--border);background:var(--white);box-shadow:0 12px 48px rgba(11,29,58,0.07);overflow:hidden;flex-shrink:0;opacity:0;animation:cardIn 1s cubic-bezier(.22,.68,0,1.3) forwards .5s}
+  @keyframes cardIn{from{opacity:0;transform:translateY(24px) scale(.97)}to{opacity:1;transform:none}}
+  .card-top{background:var(--navy);padding:28px 24px 20px}
+  .card-avatar{width:56px;height:56px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-family:'Instrument Serif',serif;font-size:22px;color:var(--white);margin-bottom:14px;border:2px solid rgba(255,255,255,.15)}
+  .card-name{font-family:'Instrument Serif',serif;font-size:16px;color:var(--white);margin-bottom:3px}
+  .card-role{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.5)}
+  .card-body{padding:20px 24px;display:flex;flex-direction:column;gap:0}
+  .card-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--border)}
+  .card-row:last-child{border-bottom:none}
+  .card-lbl{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+  .card-val{font-size:13px;font-weight:600;color:var(--navy)}
+  .card-val.blue{color:var(--blue)}
+  .hero-badge,.hero-name,.hero-role,.hero-desc,.hero-actions{opacity:0;animation:fadeUp .7s ease forwards}
+  .hero-badge{animation-delay:.05s}.hero-name{animation-delay:.15s}.hero-role{animation-delay:.25s}.hero-desc{animation-delay:.35s}.hero-actions{animation-delay:.45s}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+  /* LOGOS BAR */
+  .logos-bar{background:var(--off);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:20px 0}
+  .logos-inner{max-width:1120px;margin:0 auto;padding:0 48px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .logos-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);white-space:nowrap;margin-right:8px}
+  .logo-chip{padding:6px 16px;border-radius:100px;background:var(--white);border:1px solid var(--border);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.5px;color:var(--navy);font-weight:500}
+
+  /* SECTION COMMONS */
+  section{padding:96px 0}
+  .container{max-width:1120px;margin:0 auto;padding:0 48px}
+  .section-head{margin-bottom:60px}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--blue);margin-bottom:12px}
+  .sec-title{font-family:'Instrument Serif',serif;font-size:clamp(32px,3.5vw,48px);color:var(--navy);line-height:1.15;letter-spacing:-.3px}
+  .sec-sub{font-size:15px;color:var(--muted);margin-top:12px;max-width:540px;line-height:1.75}
+
+  /* ABOUT */
+  #about{background:var(--off)}
+  .about-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:72px;align-items:start}
+  .about-text p{color:var(--body);font-size:15px;line-height:1.9;margin-bottom:18px}
+  .about-text p strong{color:var(--navy);font-weight:600}
+  .about-contact{margin-top:32px;display:flex;flex-direction:column;gap:12px}
+  .cinfo{display:flex;align-items:center;gap:12px;font-size:13.5px;color:var(--body)}
+  .cinfo-icon{width:32px;height:32px;border-radius:8px;background:var(--blue-dim);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--blue)}
+  .cinfo a{color:var(--body);transition:color .2s}
+  .cinfo a:hover{color:var(--blue)}
+  .edu-cards{display:flex;flex-direction:column;gap:14px}
+  .edu-card{background:var(--white);border:1.5px solid var(--border);border-radius:12px;padding:22px 24px;position:relative;transition:border-color .25s,box-shadow .25s}
+  .edu-card:hover{border-color:var(--blue-lt);box-shadow:0 4px 24px rgba(29,78,216,0.07)}
+  .edu-card::before{content:'';position:absolute;left:0;top:12px;bottom:12px;width:3px;background:var(--blue);border-radius:0 4px 4px 0}
+  .edu-deg{font-size:13.5px;font-weight:600;color:var(--navy);margin-bottom:3px}
+  .edu-school{font-size:12.5px;color:var(--muted);margin-bottom:10px}
+  .edu-pills{display:flex;gap:8px;flex-wrap:wrap}
+  .edu-pill{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.5px;padding:3px 10px;border-radius:4px;background:var(--blue-dim);color:var(--blue)}
+
+  /* EXPERIENCE */
+  #experience{background:var(--white)}
+  .exp-timeline{display:flex;flex-direction:column;gap:0}
+  .exp-item{display:grid;grid-template-columns:200px 1fr;gap:0;position:relative}
+  .exp-item+.exp-item{border-top:1px solid var(--border);margin-top:48px;padding-top:48px}
+  .exp-left{padding-right:40px;padding-top:4px}
+  .exp-period{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:var(--blue);margin-bottom:6px}
+  .exp-type{font-size:11.5px;color:var(--muted)}
+  .exp-badge{margin-top:16px;display:inline-block;padding:5px 12px;border-radius:6px;background:var(--navy);color:var(--white);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase}
+  .exp-role{font-family:'Instrument Serif',serif;font-size:28px;color:var(--navy);margin-bottom:4px;line-height:1.2}
+  .exp-company-line{font-size:13.5px;color:var(--muted);margin-bottom:20px;display:flex;align-items:center;gap:8px}
+  .exp-company-line strong{color:var(--body)}
+  .exp-ul{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+  .exp-ul li{display:flex;gap:12px;font-size:14px;color:var(--body);line-height:1.75}
+  .exp-ul li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--blue);flex-shrink:0;margin-top:9px}
+  .tech-stack{display:flex;flex-wrap:wrap;gap:8px}
+  .tech-chip{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.5px;padding:5px 12px;border-radius:6px;background:var(--off2);border:1px solid var(--border);color:var(--navy)}
+
+  /* SKILLS BENTO */
+  #skills{background:var(--off)}
+  .bento{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:auto;gap:16px}
+  .bento-card{background:var(--white);border:1.5px solid var(--border);border-radius:14px;padding:28px;transition:border-color .25s,box-shadow .25s,transform .25s}
+  .bento-card:hover{border-color:var(--blue-lt);box-shadow:0 6px 30px rgba(29,78,216,0.08);transform:translateY(-3px)}
+  .bento-card.wide{grid-column:span 2}
+  .bento-icon{width:40px;height:40px;border-radius:10px;background:var(--blue-dim);display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:16px}
+  .bento-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+  .bento-title{font-family:'Instrument Serif',serif;font-size:19px;color:var(--navy);margin-bottom:14px}
+  .skill-items{display:flex;flex-direction:column;gap:8px}
+  .skill-item{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .skill-name{font-size:13px;color:var(--body);font-weight:500;white-space:nowrap}
+  .skill-bar-wrap{flex:1;height:3px;background:var(--off2);border-radius:2px;overflow:hidden}
+  .skill-bar{height:100%;background:linear-gradient(90deg,var(--blue),var(--blue-lt));border-radius:2px;transform:scaleX(0);transform-origin:left;transition:transform 1s cubic-bezier(.22,.68,0,1.1)}
+  .skill-bar.animated{transform:scaleX(1)}
+  .skill-tags{display:flex;flex-wrap:wrap;gap:7px}
+  .skill-tag{font-family:'IBM Plex Mono',monospace;font-size:10.5px;padding:5px 11px;border-radius:6px;background:var(--off2);border:1px solid var(--border);color:var(--navy);letter-spacing:.3px}
+  .stat-big{font-family:'Instrument Serif',serif;font-size:56px;color:var(--navy);line-height:1;margin-bottom:6px}
+  .stat-big span{color:var(--blue)}
+  .stat-desc{font-size:13px;color:var(--muted);line-height:1.6}
+
+  /* PROJECTS */
+  #projects{background:var(--white)}
+  .projects-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .proj-card{border:1.5px solid var(--border);border-radius:16px;overflow:hidden;transition:border-color .3s,box-shadow .3s,transform .3s;background:var(--white);display:flex;flex-direction:column}
+  .proj-card:hover{border-color:var(--navy);box-shadow:0 16px 48px rgba(11,29,58,0.1);transform:translateY(-5px)}
+  .proj-header{background:var(--navy);padding:32px 32px 28px;position:relative;overflow:hidden}
+  .proj-header::after{content:'';position:absolute;right:-30px;bottom:-30px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.04)}
+  .proj-num{font-family:'Instrument Serif',serif;font-size:13px;color:rgba(255,255,255,.35);letter-spacing:1px;margin-bottom:12px}
+  .proj-title{font-family:'Instrument Serif',serif;font-size:24px;color:var(--white);line-height:1.25}
+  .proj-body{padding:28px 32px;flex:1;display:flex;flex-direction:column;gap:20px}
+  .proj-desc{font-size:13.5px;color:var(--body);line-height:1.8}
+  .proj-highlights{list-style:none;display:flex;flex-direction:column;gap:8px}
+  .proj-highlights li{font-size:13px;color:var(--muted);display:flex;gap:9px;align-items:flex-start}
+  .proj-highlights li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;margin-top:1px}
+  .proj-stack{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+  .stack-tag{font-family:'IBM Plex Mono',monospace;font-size:10.5px;padding:4px 10px;border-radius:5px;background:var(--blue-dim);border:1px solid rgba(29,78,216,.15);color:var(--blue);letter-spacing:.3px}
+
+  /* CERTS */
+  #certifications{background:var(--off)}
+  .certs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .cert-card{background:var(--white);border:1.5px solid var(--border);border-radius:12px;padding:24px;display:flex;gap:16px;align-items:flex-start;transition:border-color .25s,transform .25s}
+  .cert-card:hover{border-color:var(--blue-lt);transform:translateY(-3px)}
+  .cert-icon{width:40px;height:40px;border-radius:10px;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+  .cert-title{font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;line-height:1.4}
+  .cert-issuer{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.8px;text-transform:uppercase;color:var(--muted)}
+
+  /* CONTACT */
+  #contact{background:var(--navy);padding:120px 0;text-align:center}
+  .contact-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--blue-lt);margin-bottom:20px}
+  .contact-heading{font-family:'Instrument Serif',serif;font-size:clamp(38px,5vw,64px);color:var(--white);line-height:1.1;margin-bottom:18px;letter-spacing:-.3px}
+  .contact-heading em{font-style:italic;color:rgba(255,255,255,.5)}
+  .contact-sub{font-size:15px;color:rgba(255,255,255,.55);max-width:460px;margin:0 auto 48px;line-height:1.8}
+  .contact-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .btn-white{padding:14px 30px;background:var(--white);color:var(--navy);border-radius:8px;font-size:13.5px;font-weight:600;transition:background .2s,transform .15s;display:inline-block}
+  .btn-white:hover{background:var(--off2);transform:translateY(-1px)}
+  .btn-outline-white{padding:14px 30px;border:1.5px solid rgba(255,255,255,.2);color:var(--white);border-radius:8px;font-size:13.5px;font-weight:500;transition:border-color .2s,background .2s,transform .15s;display:inline-block}
+  .btn-outline-white:hover{border-color:rgba(255,255,255,.5);background:rgba(255,255,255,.05);transform:translateY(-1px)}
+
+  /* FOOTER */
+  footer{background:#07121f;border-top:1px solid rgba(255,255,255,.06);padding:28px 0}
+  .footer-inner{max-width:1120px;margin:0 auto;padding:0 48px;display:flex;justify-content:space-between;align-items:center}
+  footer p{font-family:'IBM Plex Mono',monospace;font-size:11px;color:rgba(255,255,255,.3);letter-spacing:.5px}
+  .footer-links{display:flex;gap:24px}
+  .footer-links a{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.3);transition:color .2s}
+  .footer-links a:hover{color:rgba(255,255,255,.7)}
+
+  /* REVEAL */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}
+  .reveal.visible{opacity:1;transform:none}
+
+  /* RESPONSIVE */
+  @media(max-width:960px){
+    .nav-inner{padding:0 24px}
+    .nav-links li:not(:last-child){display:none}
+    .hero-inner{grid-template-columns:1fr;padding:0 24px}
+    .hero-card{display:none}
+    .container{padding:0 24px}
+    .logos-inner{padding:0 24px}
+    section{padding:72px 0}
+    .about-grid{grid-template-columns:1fr;gap:48px}
+    .exp-item{grid-template-columns:1fr;gap:16px}
+    .exp-left{padding-right:0}
+    .bento{grid-template-columns:1fr 1fr}
+    .bento-card.wide{grid-column:span 2}
+    .projects-grid{grid-template-columns:1fr}
+    .certs-grid{grid-template-columns:1fr 1fr}
+    .footer-inner{flex-direction:column;gap:12px;text-align:center;padding:0 24px}
+  }
+  @media(max-width:560px){
+    .bento{grid-template-columns:1fr}
+    .bento-card.wide{grid-column:span 1}
+    .certs-grid{grid-template-columns:1fr}
+    #contact{padding:80px 24px}
+  }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">VK<span>.</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#certifications">Certifications</a></li>
+      <li><a href="mailto:pvamsikrishna2004@gmail.com" class="nav-hire">Hire Me</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">
+        <div class="hero-badge-dot"></div>
+        <span class="hero-badge-text">Open to Opportunities</span>
+      </div>
+      <h1 class="hero-name">Vamsi Krishna<br><em>Pasumarthy</em></h1>
+      <div class="hero-role">
+        Java Backend Developer
+        <span class="sep"></span>
+        KPMG India
+        <span class="sep"></span>
+        Visakhapatnam
+      </div>
+      <p class="hero-desc">
+        B.Tech CSE Graduate (2025) building enterprise-grade backend systems.
+        Specializing in <strong>Spring Boot</strong>, <strong>RESTful API design</strong>,
+        and <strong>relational database architecture</strong> at one of the Big 4
+        professional services firms in the world.
+      </p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn-navy">View My Work</a>
+        <a href="mailto:pvamsikrishna2004@gmail.com" class="btn-outline">Get in Touch</a>
+        <a href="https://linkedin.com/in/vamsi-krishna-83523a294" target="_blank" class="btn-outline">LinkedIn ↗</a>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <div class="card-top">
+        <div class="card-avatar">VK</div>
+        <div class="card-name">Vamsi Krishna Pasumarthy</div>
+        <div class="card-role">Java Backend Developer</div>
+      </div>
+      <div class="card-body">
+        <div class="card-row"><span class="card-lbl">Company</span><span class="card-val">KPMG India</span></div>
+        <div class="card-row"><span class="card-lbl">Experience</span><span class="card-val blue">6 Months</span></div>
+        <div class="card-row"><span class="card-lbl">Graduated</span><span class="card-val">2025</span></div>
+        <div class="card-row"><span class="card-lbl">CGPA</span><span class="card-val">8.71 / 10</span></div>
+        <div class="card-row"><span class="card-lbl">Stack</span><span class="card-val">Java · Spring Boot</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGOS BAR -->
+<div class="logos-bar">
+  <div class="logos-inner">
+    <span class="logos-label">Core Tech Stack</span>
+    <span class="logo-chip">Java</span>
+    <span class="logo-chip">Spring Boot</span>
+    <span class="logo-chip">REST API</span>
+    <span class="logo-chip">MySQL</span>
+    <span class="logo-chip">Oracle DB</span>
+    <span class="logo-chip">Hibernate</span>
+    <span class="logo-chip">Docker</span>
+    <span class="logo-chip">Git</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">01 — About</div>
+      <h2 class="sec-title">The Person<br>Behind the Code</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>
+          I'm <strong>Vamsi Krishna Pasumarthy</strong>, a <strong>Java Backend Developer</strong>
+          currently employed at <strong>KPMG India</strong> — one of the globally renowned Big 4
+          professional services firms. As a 2025 Computer Science Engineering graduate, I combine
+          a strong academic foundation with real-world enterprise experience.
+        </p>
+        <p>
+          My work centers on architecting backend systems using the <strong>Spring ecosystem</strong> —
+          REST API design, data persistence with JPA/Hibernate, and relational database
+          management. I value clean code, meaningful abstractions, and systems built to last.
+        </p>
+        <p>
+          I hold a consistent track record of academic excellence — 8.71 CGPA in B.Tech,
+          95.9% in Intermediate — and carry multiple industry certifications including
+          <strong>Oracle Certified Foundations Associate</strong> and a <strong>Certified Java Professional</strong> credential.
+        </p>
+        <div class="about-contact">
+          <div class="cinfo">
+            <div class="cinfo-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11.5 19.79 19.79 0 01.12 2.94 2 2 0 012.11 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l.61-.61a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            </div>
+            +91 8897975004
+          </div>
+          <div class="cinfo">
+            <div class="cinfo-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <a href="mailto:pvamsikrishna2004@gmail.com">pvamsikrishna2004@gmail.com</a>
+          </div>
+          <div class="cinfo">
+            <div class="cinfo-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </div>
+            <a href="https://linkedin.com/in/vamsi-krishna-83523a294" target="_blank">linkedin.com/in/vamsi-krishna-83523a294</a>
+          </div>
+          <div class="cinfo">
+            <div class="cinfo-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            Visakhapatnam, Andhra Pradesh, India
+          </div>
+        </div>
+      </div>
+
+      <div class="edu-cards reveal">
+        <div class="edu-card">
+          <div class="edu-deg">B.Tech — Computer Science &amp; Engineering</div>
+          <div class="edu-school">Dr. Lankapalli Bullayya College of Engineering, Visakhapatnam</div>
+          <div class="edu-pills"><span class="edu-pill">CGPA 8.71/10</span><span class="edu-pill">2021 – 2025</span></div>
+        </div>
+        <div class="edu-card">
+          <div class="edu-deg">Intermediate — MPC</div>
+          <div class="edu-school">Sri Gayatri Junior College, Visakhapatnam</div>
+          <div class="edu-pills"><span class="edu-pill">95.9%</span><span class="edu-pill">2019 – 2021</span></div>
+        </div>
+        <div class="edu-card">
+          <div class="edu-deg">SSC — Class X</div>
+          <div class="edu-school">Ravindra Bharathi School, Visakhapatnam</div>
+          <div class="edu-pills"><span class="edu-pill">93%</span><span class="edu-pill">2019</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">02 — Experience</div>
+      <h2 class="sec-title">Where I've<br>Made an Impact</h2>
+      <p class="sec-sub">Professional experience building robust backend systems in enterprise environments.</p>
+    </div>
+    <div class="exp-timeline">
+      <div class="exp-item reveal">
+        <div class="exp-left">
+          <div class="exp-period">Oct 2025 – Present</div>
+          <div class="exp-type">Full-time · 6 Months</div>
+          <div class="exp-badge">KPMG India</div>
+        </div>
+        <div class="exp-right">
+          <div class="exp-role">Java Backend Developer</div>
+          <div class="exp-company-line"><strong>KPMG India</strong> · Big 4 Professional Services · Visakhapatnam</div>
+          <ul class="exp-ul">
+            <li>Developing and maintaining robust Java backend services within KPMG's enterprise-grade technology ecosystem, contributing directly to client-facing solutions at scale.</li>
+            <li>Designing and consuming RESTful APIs using Spring Boot, applying best practices in layered architecture, exception handling, and API versioning.</li>
+            <li>Collaborating in Agile sprints with cross-functional teams, participating in code reviews and adhering to strict enterprise-level coding standards and quality gates.</li>
+            <li>Managing relational database interactions with MySQL and Oracle, authoring optimized queries and overseeing data modeling for business-critical workflows.</li>
+            <li>Utilizing Git and GitHub for version control, branching strategies, and collaborative pull request workflows across team repositories.</li>
+          </ul>
+          <div class="tech-stack">
+            <span class="tech-chip">Java</span><span class="tech-chip">Spring Boot</span><span class="tech-chip">REST API</span><span class="tech-chip">MySQL</span><span class="tech-chip">Oracle DB</span><span class="tech-chip">Git</span><span class="tech-chip">Agile / Scrum</span><span class="tech-chip">Postman</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-left">
+          <div class="exp-period">Jun 2023 – Jul 2023</div>
+          <div class="exp-type">Internship · 7 Weeks</div>
+          <div class="exp-badge">Info-Allies</div>
+        </div>
+        <div class="exp-right">
+          <div class="exp-role">Embedded Systems Intern</div>
+          <div class="exp-company-line"><strong>Info-Allies Company</strong> · Technology Internship</div>
+          <ul class="exp-ul">
+            <li>Gained practical exposure to Embedded Systems architecture and hardware-software integration principles in a professional engineering environment.</li>
+            <li>Acquired hands-on proficiency in installing and configuring BOSS (Bharat Operating System Solutions) — an Indian government Linux distribution — across target embedded devices.</li>
+            <li>Strengthened foundational knowledge of operating system internals, boot sequences, and device-level system configuration.</li>
+          </ul>
+          <div class="tech-stack">
+            <span class="tech-chip">Embedded Systems</span><span class="tech-chip">Linux</span><span class="tech-chip">BOSS OS</span><span class="tech-chip">Hardware Integration</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS BENTO -->
+<section id="skills">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">03 — Skills</div>
+      <h2 class="sec-title">Technical<br>Proficiency</h2>
+    </div>
+    <div class="bento">
+      <div class="bento-card reveal">
+        <div class="bento-icon">⚙️</div>
+        <div class="bento-label">Core Languages</div>
+        <div class="bento-title">Languages</div>
+        <div class="skill-items">
+          <div class="skill-item"><span class="skill-name">Java</span><div class="skill-bar-wrap"><div class="skill-bar" style="--w:92%"></div></div></div>
+          <div class="skill-item"><span class="skill-name">SQL</span><div class="skill-bar-wrap"><div class="skill-bar" style="--w:85%"></div></div></div>
+          <div class="skill-item"><span class="skill-name">JavaScript</span><div class="skill-bar-wrap"><div class="skill-bar" style="--w:60%"></div></div></div>
+          <div class="skill-item"><span class="skill-name">C</span><div class="skill-bar-wrap"><div class="skill-bar" style="--w:70%"></div></div></div>
+        </div>
+      </div>
+
+      <div class="bento-card wide reveal">
+        <div class="bento-icon">🏗️</div>
+        <div class="bento-label">Backend Frameworks &amp; APIs</div>
+        <div class="bento-title">Spring Ecosystem &amp; More</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Spring Boot</span><span class="skill-tag">Spring MVC</span><span class="skill-tag">Hibernate / JPA</span><span class="skill-tag">Spring Data JPA</span><span class="skill-tag">REST API Design</span><span class="skill-tag">JDBC</span><span class="skill-tag">Servlets API</span><span class="skill-tag">Swagger / OpenAPI</span><span class="skill-tag">Spring Cache</span>
+        </div>
+      </div>
+
+      <div class="bento-card reveal">
+        <div class="bento-label">At KPMG India</div>
+        <div class="stat-big">6<span>mo</span></div>
+        <div class="stat-desc">Professional backend experience at a Big 4 firm building enterprise Java systems.</div>
+      </div>
+
+      <div class="bento-card reveal">
+        <div class="bento-icon">🗄️</div>
+        <div class="bento-label">Databases</div>
+        <div class="bento-title">Data Layer</div>
+        <div class="skill-items">
+          <div class="skill-item"><span class="skill-name">MySQL</span><div class="skill-bar-wrap"><div class="skill-bar" style="--w:88%"></div></div></div>
+          <div class="skill-item"><span class="skill-name">Oracle DB</span><div class="skill-bar-wrap"><div class="skill-bar" style="--w:78%"></div></div></div>
+        </div>
+      </div>
+
+      <div class="bento-card reveal">
+        <div class="bento-label">Academic Score</div>
+        <div class="stat-big">8.71<span>/10</span></div>
+        <div class="stat-desc">B.Tech CGPA — Dr. Lankapalli Bullayya College of Engineering, 2025.</div>
+      </div>
+
+      <div class="bento-card wide reveal">
+        <div class="bento-icon">🛠️</div>
+        <div class="bento-label">Development Tools &amp; Frontend</div>
+        <div class="bento-title">Dev Toolchain</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Git &amp; GitHub</span><span class="skill-tag">Docker</span><span class="skill-tag">Postman</span><span class="skill-tag">Eclipse</span><span class="skill-tag">Spring Tool Suite</span><span class="skill-tag">HTML5</span><span class="skill-tag">CSS3</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">04 — Projects</div>
+      <h2 class="sec-title">What I've<br>Built</h2>
+      <p class="sec-sub">End-to-end backend projects demonstrating real-world engineering depth.</p>
+    </div>
+    <div class="projects-grid">
+      <div class="proj-card reveal">
+        <div class="proj-header">
+          <div class="proj-num">Project 01</div>
+          <div class="proj-title">Online Food Ordering System</div>
+        </div>
+        <div class="proj-body">
+          <p class="proj-desc">A production-grade RESTful backend managing users, restaurants, menus, and orders with comprehensive lifecycle handling — from registration to billing and cancellation.</p>
+          <ul class="proj-highlights">
+            <li>DTO-based layered architecture for clean separation of concerns</li>
+            <li>Custom JPQL queries for complex relational data retrieval</li>
+            <li>Spring Cache integration for improved read performance</li>
+            <li>Global exception handling with structured error responses</li>
+            <li>Full Swagger/OpenAPI documentation for API consumers</li>
+            <li>Paginated food listing and image upload support</li>
+          </ul>
+          <div class="proj-stack">
+            <span class="stack-tag">Java 21</span><span class="stack-tag">Spring Boot</span><span class="stack-tag">Spring Data JPA</span><span class="stack-tag">Hibernate</span><span class="stack-tag">MySQL</span><span class="stack-tag">Swagger/OpenAPI</span><span class="stack-tag">Spring Cache</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-header">
+          <div class="proj-num">Project 02</div>
+          <div class="proj-title">Product Management System</div>
+        </div>
+        <div class="proj-body">
+          <p class="proj-desc">A full-stack web application built on Java EE core principles enabling users to register, authenticate, and manage product listings with a dynamic cart feature.</p>
+          <ul class="proj-highlights">
+            <li>User authentication and session management via Servlets</li>
+            <li>Dynamic product listing with CRUD operations throughout</li>
+            <li>Cart functionality supporting add/remove item operations</li>
+            <li>MySQL backend with clean JDBC data access patterns</li>
+            <li>Responsive HTML/CSS frontend with server-side rendering</li>
+          </ul>
+          <div class="proj-stack">
+            <span class="stack-tag">Java</span><span class="stack-tag">Servlets</span><span class="stack-tag">JDBC</span><span class="stack-tag">MySQL</span><span class="stack-tag">HTML5</span><span class="stack-tag">CSS3</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">05 — Credentials</div>
+      <h2 class="sec-title">Certifications &amp;<br>Achievements</h2>
+    </div>
+    <div class="certs-grid">
+      <div class="cert-card reveal"><div class="cert-icon">🏛️</div><div><div class="cert-title">Oracle Certified Foundations Associate</div><div class="cert-issuer">Oracle Corporation</div></div></div>
+      <div class="cert-card reveal"><div class="cert-icon">☕</div><div><div class="cert-title">Certified Java Professional</div><div class="cert-issuer">Industry Certification</div></div></div>
+      <div class="cert-card reveal"><div class="cert-icon">💬</div><div><div class="cert-title">Communication Skills Certificate</div><div class="cert-issuer">TCS iON</div></div></div>
+      <div class="cert-card reveal"><div class="cert-icon">💡</div><div><div class="cert-title">SQL 50 — Problem Solver Badge</div><div class="cert-issuer">LeetCode</div></div></div>
+      <div class="cert-card reveal"><div class="cert-icon">⌨️</div><div><div class="cert-title">Typewriting English — Higher Grade</div><div class="cert-issuer">Government Board Certification</div></div></div>
+      <div class="cert-card reveal"><div class="cert-icon">🏆</div><div><div class="cert-title">National Level Qualifier — Spell Bee</div><div class="cert-issuer">Spell Bee International</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-eyebrow">06 — Let's Connect</div>
+    <h2 class="contact-heading">Ready to Hire a<br><em>Driven Java Developer?</em></h2>
+    <p class="contact-sub">Vamsi Krishna Pasumarthy is actively exploring new opportunities in Java Backend Development. Whether you have a role or just want to connect — reach out directly.</p>
+    <div class="contact-btns">
+      <a href="mailto:pvamsikrishna2004@gmail.com" class="btn-white">pvamsikrishna2004@gmail.com</a>
+      <a href="https://linkedin.com/in/vamsi-krishna-83523a294" target="_blank" class="btn-outline-white">View LinkedIn ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <p>© 2025 Vamsi Krishna Pasumarthy. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="#hero">Top</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="mailto:pvamsikrishna2004@gmail.com">Email</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Reveal on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const siblings = [...entry.target.parentElement.querySelectorAll('.reveal')];
+        const idx = siblings.indexOf(entry.target);
+        setTimeout(() => entry.target.classList.add('visible'), idx * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Skill bar animation
+  const barObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.skill-bar').forEach((bar, i) => {
+          const w = bar.style.getPropertyValue('--w') || '80%';
+          setTimeout(() => {
+            bar.style.width = w;
+            bar.classList.add('animated');
+          }, i * 120);
+        });
+        barObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.bento-card').forEach(el => barObserver.observe(el));
+
+  // Active nav highlight
+  const sections = document.querySelectorAll('section[id]');
+  const navAs = document.querySelectorAll('.nav-links a:not(.nav-hire)');
+  sections.forEach(s => {
+    new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          navAs.forEach(a => {
+            const active = a.getAttribute('href') === '#' + e.target.id;
+            a.style.color = active ? 'var(--navy)' : '';
+            a.style.fontWeight = active ? '600' : '';
+          });
+        }
+      });
+    }, { rootMargin: '-40% 0px -55%' }).observe(s);
+  });
+</script>
+</body>
+</html>
